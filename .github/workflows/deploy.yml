@@ -52,7 +52,8 @@ jobs:
           external_repository: ${{ github.repository_owner }}/blog-source
           publish_dir: ./
           publish_branch: main
-          exclude_assets: 'public,node_modules,.git,.github'
+          exclude_assets: '.git,.github,public,node_modules'
+          force_orphan: true
       
       - name: Deploy built site to blog repository
         uses: peaceiris/actions-gh-pages@v3
@@ -61,4 +62,4 @@ jobs:
           external_repository: ${{ github.repository_owner }}/blog
           publish_dir: ./public
           publish_branch: main
-          cname: false
+          force_orphan: true

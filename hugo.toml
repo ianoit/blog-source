@@ -1,7 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'id'
 title = 'ianotes'
-theme = ''
 
 [params]
   description = 'Blog pribadi dengan desain modern dan mudah dibaca'
