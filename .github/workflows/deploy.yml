@@ -47,7 +47,8 @@ jobs:
       
       - name: Deploy source to blog-source repository
         run: |
-          # Clone target repository
+          # Cleanup and clone target repository
+          rm -rf temp-source
           git clone https://${{ secrets.DEPLOY_TOKEN }}@github.com/${{ github.repository_owner }}/blog-source.git temp-source
           cd temp-source
           
@@ -67,7 +68,8 @@ jobs:
       
       - name: Deploy built site to blog repository
         run: |
-          # Clone target repository
+          # Cleanup and clone target repository
+          rm -rf temp-blog
           git clone https://${{ secrets.DEPLOY_TOKEN }}@github.com/${{ github.repository_owner }}/blog.git temp-blog
           cd temp-blog
           
