@@ -1,0 +1,67 @@
+{{ define "main" }}
+<div class="container">
+    <div class="hero">
+        <h1 class="hero__title">{{ .Title }}</h1>
+        {{ if .Content }}
+        <div class="hero__description">
+            {{ .Content }}
+        </div>
+        {{ end }}
+    </div>
+
+    <div class="posts">
+        {{ range .Paginator.Pages }}
+        <article class="post-card">
+            <div class="post-card__content">
+                <h2 class="post-card__title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                
+                <div class="post-card__meta">
+                    <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+                        <i class="fas fa-calendar"></i>
+                        {{ .Date.Format "2 January 2006" }}
+                    </time>
+                    {{ if .Params.categories }}
+                    <div class="post-card__category">
+                        <i class="fas fa-folder"></i>
+                        {{ range first 1 .Params.categories }}
+                        <a href="{{ "/categories/" | relURL }}{{ . | urlize }}/" class="category">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+                
+                {{ if .Content }}
+                <div class="post-card__excerpt">{{ .Content | plainify | truncate 300 }}</div>
+                {{ end }}
+                
+                <a href="{{ .RelPermalink }}" class="post-card__read-more">
+                    Baca selengkapnya <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+
+    {{ if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination">
+        {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" class="pagination__link pagination__link--prev">
+            <i class="fas fa-chevron-left"></i> Sebelumnya
+        </a>
+        {{ end }}
+        
+        <span class="pagination__info">
+            Halaman {{ .Paginator.PageNumber }} dari {{ .Paginator.TotalPages }}
+        </span>
+        
+        {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" class="pagination__link pagination__link--next">
+            Selanjutnya <i class="fas fa-chevron-right"></i>
+        </a>
+        {{ end }}
+    </nav>
+    {{ end }}
+</div>
+{{ end }}
