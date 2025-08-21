@@ -1,0 +1,37 @@
+baseURL = 'https://example.org/'
+languageCode = 'id'
+title = 'ianotes'
+
+[params]
+  description = 'Blog pribadi dengan desain modern dan mudah dibaca'
+  author = 'Penulis Blog'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+
+[taxonomies]
+  year = "year"
+  month = "month"
+  category = "categories"
+  tag = "tags"
+
+[permalinks]
+  posts = "/posts/:year/:month/:slug/"
+  year = "/arsip/:slug/"
+  month = "/arsip/:slug/"
+
+[menu]
+  [[menu.main]]
+    name = "Beranda"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Arsip"
+    url = "/arsip/"
+    weight = 2

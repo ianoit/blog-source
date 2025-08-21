@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="container">
+    <div class="hero">
+        <h1 class="hero__title">{{ .Title | replaceRE "^\\d{4}/" "" | title }}</h1>
+        <div class="hero__description">
+            Artikel yang dipublikasikan pada {{ .Title | replaceRE "^(\\d{4})/(\\d{2})$" "$1 bulan $2" }}
+        </div>
+    </div>
+
+    <div class="archive">
+        <div class="archive__list">
+            {{ range .Pages }}
+            <div class="archive__item">
+                <time class="archive__date">{{ .Date.Format "02 Jan" }}</time>
+                <span class="archive__separator">—</span>
+                <a href="{{ .RelPermalink }}" class="archive__title">{{ .Title }}</a>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}
