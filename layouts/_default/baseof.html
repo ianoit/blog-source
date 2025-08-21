@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "id" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="author" content="{{ .Site.Params.author }}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Theme Detection -->
+    <script>
+        // Check for saved theme preference or default to 'light'
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+</head>
+<body{{ if .IsHome }} class="homepage"{{ end }}>
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__brand">
+                <a href="{{ .Site.BaseURL }}" class="nav__logo">{{ .Site.Title }}</a>
+            </div>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    {{ range .Site.Menus.main }}
+                    <li class="nav__item">
+                        <a href="{{ .URL }}" class="nav__link {{ if $.IsMenuCurrent "main" . }}nav__link--active{{ end }}">
+                            {{ .Name }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+            
+            <div class="nav__actions">
+                <!-- Search Button -->
+                <button class="nav__search-btn" id="search-btn" aria-label="Cari">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <!-- Theme Toggle -->
+                <button class="nav__theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="search-modal">
+        <div class="search-modal__content">
+            <div class="search-modal__header">
+                <input type="text" class="search-modal__input" id="search-input" placeholder="Cari artikel...">
+                <button class="search-modal__close" id="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-modal__results" id="search-results">
+                <p class="search-modal__placeholder">Mulai mengetik untuk mencari artikel...</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; {{ now.Year }} {{ .Site.Title }}. Dibuat dengan <i class="fas fa-heart"></i> menggunakan Hugo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ "js/main.js" | relURL }}"></script>
+</body>
+</html>

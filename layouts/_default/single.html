@@ -1,0 +1,104 @@
+{{ define "main" }}
+<div class="container">
+    <article class="post">
+        <header class="post__header">
+            <h1 class="post__title">{{ .Title }}</h1>
+            
+            <div class="post__meta">
+                <time class="post__date" datetime="{{ .Date.Format "2006-01-02" }}">
+                    <i class="fas fa-calendar"></i>
+                    {{ .Date.Format "2 January 2006" }}
+                </time>
+                
+                {{ if .Params.author }}
+                <span class="post__author">
+                    <i class="fas fa-user"></i>
+                    {{ .Params.author }}
+                </span>
+                {{ end }}
+                
+                <span class="post__reading-time">
+                    <i class="fas fa-clock"></i>
+                    {{ .ReadingTime }} menit baca
+                </span>
+                
+                {{ if .Params.categories }}
+                <span class="post__category-meta">
+                    <i class="fas fa-folder"></i>
+                    {{ range first 1 .Params.categories }}
+                    <a href="{{ "/categories/" | relURL }}{{ . | urlize }}/" class="category-meta-link">{{ . }}</a>
+                    {{ end }}
+                </span>
+                {{ end }}
+            </div>
+            
+        </header>
+        
+        <div class="post__content">
+            {{ .Content }}
+        </div>
+        
+        <footer class="post__footer">
+            <div class="post__taxonomy">
+                {{ if .Params.tags }}
+                <div class="post__tags">
+                    <i class="fas fa-tags"></i>
+                    <span class="taxonomy-label">Tags:</span>
+                    {{ range .Params.tags }}
+                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-link">#{{ . }}</a>{{ if not (eq . (index $.Params.tags (sub (len $.Params.tags) 1))) }}, {{ end }}
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            
+            <div class="post__share">
+                <h4>Bagikan artikel ini:</h4>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?text={{ .Title }}&url={{ .Permalink }}" 
+                       target="_blank" class="share-btn share-btn--twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" 
+                       target="_blank" class="share-btn share-btn--facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" 
+                       target="_blank" class="share-btn share-btn--linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="whatsapp://send?text={{ .Title }} {{ .Permalink }}" 
+                       class="share-btn share-btn--whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </article>
+    
+    <nav class="post-nav">
+        {{ if .PrevInSection }}
+        <div class="post-nav__prev">
+            <a href="{{ .PrevInSection.RelPermalink }}">
+                <i class="fas fa-chevron-left"></i>
+                <div>
+                    <span class="post-nav__label">Artikel Sebelumnya</span>
+                    <span class="post-nav__title">{{ .PrevInSection.Title }}</span>
+                </div>
+            </a>
+        </div>
+        {{ end }}
+        
+        {{ if .NextInSection }}
+        <div class="post-nav__next">
+            <a href="{{ .NextInSection.RelPermalink }}">
+                <div>
+                    <span class="post-nav__label">Artikel Selanjutnya</span>
+                    <span class="post-nav__title">{{ .NextInSection.Title }}</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        {{ end }}
+    </nav>
+</div>
+{{ end }}

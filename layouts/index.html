@@ -1,0 +1,97 @@
+{{ define "main" }}
+<div class="hero-section">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">ianotes</h1>
+            <p class="hero-subtitle">Berisi catatan-catatan saya. Silahkan dibaca siapa tau bermanfaat.</p>
+            <a href="#posts" class="hero-btn">Mulai Membaca</a>
+        </div>
+        <div class="hero-visual">
+            <div class="tech-grid">
+                <div class="grid-line grid-line-1"></div>
+                <div class="grid-line grid-line-2"></div>
+                <div class="grid-line grid-line-3"></div>
+                <div class="grid-line grid-line-4"></div>
+            </div>
+            
+            <div class="floating-elements">
+                <div class="tech-card card-1">
+                    <i class="fas fa-code"></i>
+                    <span>Code</span>
+                </div>
+                <div class="tech-card card-2">
+                    <i class="fas fa-rocket"></i>
+                    <span>Deploy</span>
+                </div>
+                <div class="tech-card card-3">
+                    <i class="fas fa-brain"></i>
+                    <span>AI</span>
+                </div>
+                <div class="tech-card card-4">
+                    <i class="fas fa-cloud"></i>
+                    <span>Cloud</span>
+                </div>
+            </div>
+            
+            <div class="geometric-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+            
+            <div class="particles">
+                <div class="particle particle-1"></div>
+                <div class="particle particle-2"></div>
+                <div class="particle particle-3"></div>
+                <div class="particle particle-4"></div>
+                <div class="particle particle-5"></div>
+                <div class="particle particle-6"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="posts" class="posts">
+        {{ range first 10 .Site.RegularPages }}
+        <article class="post-card">
+            <div class="post-card__content">
+                <h2 class="post-card__title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h2>
+                
+                <div class="post-card__meta">
+                    <time class="post-card__date" datetime="{{ .Date.Format "2006-01-02" }}">
+                        <i class="fas fa-calendar"></i>
+                        {{ .Date.Format "2 January 2006" }}
+                    </time>
+                    {{ if .Params.categories }}
+                    <div class="post-card__category">
+                        <i class="fas fa-folder"></i>
+                        {{ range first 1 .Params.categories }}
+                        <a href="{{ "/categories/" | relURL }}{{ . | urlize }}/" class="category">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+                
+                {{ if .Content }}
+                <div class="post-card__excerpt">{{ .Content | plainify | truncate 300 }}</div>
+                {{ end }}
+                
+                <a href="{{ .RelPermalink }}" class="post-card__read-more">
+                    Baca selengkapnya <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+
+    {{ if gt (len .Site.RegularPages) 10 }}
+    <div class="hero__cta">
+        <a href="/posts/" class="btn btn--primary">Lihat Semua Artikel</a>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
