@@ -57,7 +57,7 @@ jobs:
           rm -rf .*
           
           # Copy source files (exclude specific folders)
-          rsync -av --exclude='.git' --exclude='.github' --exclude='public' --exclude='node_modules' ../ ./
+          rsync -av --exclude='.git' --exclude='.github' --exclude='public' --exclude='node_modules' --exclude='temp-*' ../ ./
           
           # Commit and push
           git config user.name "GitHub Actions"
@@ -73,9 +73,8 @@ jobs:
           git clone https://${{ secrets.DEPLOY_TOKEN }}@github.com/${{ github.repository_owner }}/blog.git temp-blog
           cd temp-blog
           
-          # Clear existing content
-          rm -rf *
-          rm -rf .*
+          # Clear existing content (keep .git)
+          find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
           
           # Copy built site
           cp -r ../public/* ./
