@@ -46,20 +46,41 @@ jobs:
             --baseURL "https://${{ github.repository_owner }}.github.io/blog/"
       
       - name: Deploy source to blog-source repository
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.DEPLOY_TOKEN }}
-          external_repository: ${{ github.repository_owner }}/blog-source
-          publish_dir: ./
-          publish_branch: main
-          exclude_assets: '.git,.github,public,node_modules'
-          force_orphan: true
+        run: |
+          # Clone target repository
+          git clone https://${{ secrets.DEPLOY_TOKEN }}@github.com/${{ github.repository_owner }}/blog-source.git temp-source
+          cd temp-source
+          
+          # Clear existing content
+          rm -rf *
+          rm -rf .*
+          
+          # Copy source files (exclude specific folders)
+          rsync -av --exclude='.git' --exclude='.github' --exclude='public' --exclude='node_modules' ../ ./
+          
+          # Commit and push
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Deploy source from ${{ github.sha }}" || exit 0
+          git push origin main
       
       - name: Deploy built site to blog repository
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.DEPLOY_TOKEN }}
-          external_repository: ${{ github.repository_owner }}/blog
-          publish_dir: ./public
-          publish_branch: main
-          force_orphan: true
+        run: |
+          # Clone target repository
+          git clone https://${{ secrets.DEPLOY_TOKEN }}@github.com/${{ github.repository_owner }}/blog.git temp-blog
+          cd temp-blog
+          
+          # Clear existing content
+          rm -rf *
+          rm -rf .*
+          
+          # Copy built site
+          cp -r ../public/* ./
+          
+          # Commit and push
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Deploy site from ${{ github.sha }}" || exit 0
+          git push origin main
