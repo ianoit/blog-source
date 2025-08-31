@@ -379,6 +379,18 @@ body.loaded {
     animation-delay: 1.5s;
 }
 
+.card-5 {
+    top: 60%;
+    left: 5%;
+    animation-delay: 0.5s;
+}
+
+.card-6 {
+    top: 45%;
+    right: 35%;
+    animation-delay: 2.5s;
+}
+
 @keyframes techFloat {
     0%, 100% { 
         transform: translateY(0px) scale(1) rotateY(0deg);
