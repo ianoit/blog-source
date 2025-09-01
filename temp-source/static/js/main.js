@@ -49,7 +49,7 @@ class SearchModal {
     
     async loadSearchData() {
         try {
-            const response = await fetch('/index.json');
+            const response = await fetch('./index.json');
             this.searchData = await response.json();
         } catch (error) {
             console.error('Error loading search data:', error);
