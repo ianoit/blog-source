@@ -26,7 +26,11 @@
                     <div class="post-card__category">
                         <i class="fas fa-folder"></i>
                         {{ range first 1 .Params.categories }}
+                        {{ if not (in site.BaseURL "/blog") }}
                         <a href="{{ printf "/categories/%s/" (. | urlize) | relURL }}" class="category">{{ . }}</a>
+                        {{ else }}
+                        <a href="{{ printf "/blog/categories/%s/" (. | urlize) | relURL }}" class="category">{{ . }}</a>
+                        {{ end }}
                         {{ end }}
                     </div>
                     {{ end }}

@@ -26,7 +26,11 @@
                 <span class="post__category-meta">
                     <i class="fas fa-folder"></i>
                     {{ range first 1 .Params.categories }}
+                    {{ if not (in site.BaseURL "/blog") }}
                     <a href="{{ printf "/categories/%s/" (. | urlize) | relURL }}" class="category-meta-link">{{ . }}</a>
+                    {{ else }}
+                    <a href="{{ printf "/blog/categories/%s/" (. | urlize) | relURL }}" class="category-meta-link">{{ . }}</a>
+                    {{ end }}
                     {{ end }}
                 </span>
                 {{ end }}
@@ -45,7 +49,11 @@
                     <i class="fas fa-tags"></i>
                     <span class="taxonomy-label">Tags:</span>
                     {{ range .Params.tags }}
+                    {{ if not (in site.BaseURL "/blog") }}
                     <a href="{{ printf "/tags/%s/" (. | urlize) | relURL }}" class="tag-link">#{{ . }}</a>{{ if not (eq . (index $.Params.tags (sub (len $.Params.tags) 1))) }}, {{ end }}
+                    {{ else }}
+                    <a href="{{ printf "/blog/tags/%s/" (. | urlize) | relURL }}" class="tag-link">#{{ . }}</a>{{ if not (eq . (index $.Params.tags (sub (len $.Params.tags) 1))) }}, {{ end }}
+                    {{ end }}
                     {{ end }}
                 </div>
                 {{ end }}
