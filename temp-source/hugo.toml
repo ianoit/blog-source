@@ -1,4 +1,4 @@
-baseURL = '/'
+baseURL = 'https://ianoit.github.io/blog/'
 languageCode = 'id'
 title = 'ianotes'
 
