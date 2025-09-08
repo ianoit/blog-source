@@ -1,0 +1,12 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- $caption := .Get "caption" -}}
+
+{{ if not (in site.BaseURL "/blog") }}
+<img src="/{{ $src }}" alt="{{ $alt }}" />
+{{- else -}}
+<img src="/blog/{{ $src }}" alt="{{ $alt }}" />
+{{- end -}}
+{{- if $caption -}}
+<p><em>{{ $caption }}</em></p>
+{{- end -}}

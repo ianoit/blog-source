@@ -1,12 +1,11 @@
 ---
 title: "Pelajaran Berharga dari Buku Ikigai yang Akan Mengubah Cara Pandang Hidup Anda"
-date: 2025-09-07T19:44:10+07:00
+date: 2025-09-08T19:44:10+07:00
 categories: ["Buku"]
 tags: ["ikigai", "filosofi", "self-development", "budaya-jepang", "makna-hidup", "life-lessons"]
 ---
 
-![Cover Buku Ikigai oleh Ken Mogi](/images/posts/2025/09/1.png)
-*Filosofi Ikigai: Menemukan alasan untuk hidup*
+{{< img src="images/posts/2025/09/1.png" alt="Cover Buku Ikigai oleh Ken Mogi" caption="Filosofi Ikigai: Menemukan alasan untuk hidup" >}}
 
 Pernahkah Anda merasa hidup tanpa arah yang jelas? Atau bertanya-tanya mengapa beberapa orang tampak begitu bahagia dan puas dengan hidup mereka? Jawabannya mungkin terletak pada konsep **Ikigai**—sebuah filosofi Jepang yang telah membantu jutaan orang menemukan makna dan kebahagiaan dalam hidup.
 
