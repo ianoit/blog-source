@@ -1,5 +1,5 @@
 ---
-title: "Pelajaran Berharga dari Buku Ikigai yang Akan Mengubah Cara Pandang Hidup Anda"
+title: "Pelajaran Berharga dari Buku Ikigai"
 date: 2025-09-08T19:44:10+07:00
 categories: ["Buku"]
 tags: ["ikigai", "filosofi", "self-development", "budaya-jepang", "makna-hidup", "life-lessons"]
